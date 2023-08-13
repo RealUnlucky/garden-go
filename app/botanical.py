@@ -2,7 +2,6 @@ import requests
 import json
 import plant_api
 
-
 def lastWord(string):
     newstring = ""
 
