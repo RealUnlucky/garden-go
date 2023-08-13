@@ -73,6 +73,13 @@ const styles = StyleSheet.create({
     header: {
       backgroundColor: '#F5FCFF',
       padding: 10,
+      borderWidth: 2,
+      borderColor: "green",
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
+      marginTop: 10,
     },
     headerText: {
       textAlign: 'center',

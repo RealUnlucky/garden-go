@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable, style, TextInput} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import CollapsibleList from './CollapsibleList';
 import { useFonts } from 'expo-font';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+import * as React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import BottomSheet, { BottomSheetRefProps } from './components/BottomSheet';
+import CollapsibleList from './CollapsibleList';
+import { useFonts } from 'expo-font';
+
 
 
 const renderScene = SceneMap({
@@ -21,6 +27,18 @@ const renderScene = SceneMap({
 
 
 function Profile(){
+  const [data, setData] = React.useState([])
+
+  React.useEffect(() => {
+    fetch('http://192.168.0.100:3000/data',{
+      method:'GET'
+    })
+    .then(Response => Response.json())
+    .then(article => {
+      setData(article)
+      
+    })
+  },[])
   return(
     <View>
       <View style={{backgroundColor: '#bee3ba'}}>
@@ -38,6 +56,7 @@ function Profile(){
         <TouchableOpacity style={{alignSelf: 'center', flexDirection:'row',justifyContent:'center',backgroundColor:'#fff',width:'90%',padding:20,paddingBottom:22,borderRadius:10,shadowOpacity:80,elevation:15,marginTop:20}}>
           <Image source={require('./imgs/bell.png')} style={{width:20,height:20}}></Image>
           <Text>Missions</Text>
+          <Text>Time left: {data.HoursLeft} hours</Text>
         </TouchableOpacity>
         <View style={{alignSelf: 'center', flexDirection:'row',justifyContent:'center',backgroundColor:'#fff',width:'90%',padding:20,paddingBottom:22,borderRadius:10,shadowOpacity:80,elevation:15,marginTop:20}}>
           <Image source={require('./imgs/pottedplant.png')} style={{width:20,height:25}}></Image>
@@ -53,30 +72,92 @@ function Profile(){
 }
 
 function HomeScreen({ navigation }) {
+  const [data, setData] = React.useState([])
+
+  React.useEffect(() => {
+    fetch('http://192.168.0.100:3000/data',{
+      method:'GET'
+    })
+    .then(Response => Response.json())
+    .then(article => {
+      setData(article)
+      
+    })
+  },[])
+
+  const ref = React.useRef<BottomSheetRefProps>(null);
+
+  const onPress = React.useCallback(() => {
+    const isActive = ref?.current?.isActive();
+    if (isActive) {
+      ref?.current?.scrollTo(0);
+    } else {
+      ref?.current?.scrollTo(-200);
+    }
+  }, []);
+  
   return (
-    <ScrollView style={{flex: 1, backgroundColor: '#5FA052'}}>
-      <ImageBackground source={require('./imgs/background.jpg')} resizeMode="cover" style={{height:'150%', width:'100%'}}>
-        
-          <Text style={{marginTop: '18%', fontSize: 40, textAlign: 'center', color: '#074415', fontWeight: 'bold'}}>
-            GardenGO
+
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      
+      <View style={styles.container}>
+        <StatusBar style="light" />
+        <Text style={{fontSize: 40, marginTop: '9%', textAlign: 'center', color: '#074415', fontWeight: 'bold'}}>
+          GardenGO
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Image source={require('./flask-server/TEST.jpeg')} style={{width: '100%', height: '100%'}}></Image>
+        </TouchableOpacity>
+        <View style={{marginTop: '5%', alignContent: 'center'}}>
+          <Text style={{textAlign: 'center', fontSize: 20, color: 'green'}}>
+            Water your plant!!!
           </Text>
-          
-          <TouchableOpacity style={{marginTop: '7%', width: '50%', marginLeft: '25%', height: '50%', justifyContent: 'center'}}
-            onPress={console.log('hi')}>
-              <Image source={require('./imgs/plant.png')} style={{width: '100%', height: '100%'}}></Image>
-          </TouchableOpacity>
+          <Text style={{marginLeft: '2%', marginTop: '2%', fontSize: 15, color: 'green', textAlign:'center'}}>
+            Time left:{data.HoursLeft} hours
+          </Text>
+        </View>
 
-          <View style={{marginTop: '5%', alignContent: 'center'}}>
-            <Text style={{textAlign: 'center', fontSize: 20, color: 'green'}}>
-              (Plant) Information
-            </Text>
-            <Text style={{marginLeft: '8%', marginRight: '8%', marginTop: '2%', fontSize: 15, color: 'green'}}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-            </Text>
-          </View>
 
+        <BottomSheet ref={ref}>
+          <Text style={styles.title}>Pruning</Text>
+          <Text style={styles.text}>
+            {data.prune}
+          </Text>
+          <Text style={styles.title}>Sun</Text>
+          <Text style={styles.text}>
+            {data.sun}
+          </Text>
+          <Text style={styles.title}>Water</Text>
+          <Text style={styles.text}>
+            {data.water}
+          </Text>
+        </BottomSheet>
+      </View>
+    </GestureHandlerRootView>
+
+    /*
+    <ScrollView style={{flex: 1, backgroundColor: '#13ec5a'}}>
+      <ImageBackground source={require('./imgs/background.jpg')} resizeMode="cover" style={{height:'150%', width:'100%'}}>
+      <Text style={{fontSize: 40, marginTop: '9%', textAlign: 'center', color: '#074415', fontWeight: 'bold'}}>
+        GardenGO
+      </Text>
+      <TouchableOpacity style={{marginTop: '5%', backgroundColor: '#c7f9d2', width: '50%', marginLeft: '25%', height: '50%', justifyContent: 'center'}}
+        onPress={console.log('hi')}>
+          <Image source={require('./imgs/plant.png')} style={{width: '100%', height: '100%'}}></Image>
+      </TouchableOpacity>
+      <View style={{marginTop: '5%', alignContent: 'center'}}>
+        <Text style={{textAlign: 'center', fontSize: 20, color: 'green'}}>
+          {data.Name}
+        </Text>
+        <Text style={{marginLeft: '2%', marginTop: '2%', fontSize: 15, color: 'green'}}>
+          {data.prune}
+        </Text>
+      </View>
       </ImageBackground>
     </ScrollView>
+    */
+    
+
   );
 }
 
@@ -86,13 +167,15 @@ function DetailsScreen({ navigation }) {
     <SafeAreaView style = {{flex: 1}}>
       <ScrollView>
         <View>
-          <Text style={{textAlign: 'center', fontSize: 35, marginBottom: '4%'}}>
+
+          <Text style={{textAlign: 'center', fontSize: 35, marginBottom: '4%', fontWeight: '600'}}>
+
             Plant Collection 
             <Image source={require('./imgs/planticon.png')} style={{width: 50, height: 50}}></Image>
           </Text>
           
         </View>
-
+        
         <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
             <Text style={{textAlign:'center'}}>Basil</Text>
@@ -283,7 +366,62 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     justyifyContent: 'bottom',
-  }
+  },
+  button:{
+    height:60,
+    aspectRatio:1,
+    borderRadius:25,
+    opacity:0.6,
+  },
+  container:{
+    flex:1,
+    backgroundColor:'#73E2A7',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  title:{
+    textAlign:'center',
+    fontSize:25,
+  },
+  text:{
+    textAlign:'center',
+  },
+  plantColLeft:{
+    width: 150, height: 200, marginLeft: '15%',
+    borderRadius: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+
+  plantColRight:{
+    width: 150, height: 200, marginRight: '15%',
+    borderRadius: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+
+  plantCardShadow:{
+    flexDirection:'row', marginTop: '5%',
+    borderRadius: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    shadowOpacity: 80,
+    shadowColor: 'black',
+  },
+
+  aboutTitle: {
+    fontSize: 40,
+    textAlign: 'center',
+    marginBottom: 30,
+    fontWeight: '600',
+
+  },
 });
 
 
