@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import {ScrollView, ImageBackground, TouchableOpacity, StyleSheet, Text, View, Alert, Image, Button, useWindowDimensions, Touchable} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, ScrollView,TouchableOpacity,Alert,Touchable} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
-//import { RNCamera } from 'react-native-camera';
+import {Card} from 'react-native-paper'
 
 const renderScene = SceneMap({
 
@@ -13,6 +13,8 @@ const renderScene = SceneMap({
   third: Profile,
 
 });
+
+
 
 function Profile(){
   return(
@@ -72,9 +74,27 @@ function HomeScreen({ navigation }) {
 
 
 function DetailsScreen({ navigation }) {
+  const [data, setData] = React.useState([])
+
+  React.useEffect(() => {
+    fetch('http://192.168.0.100:3000/data',{
+      method:'GET'
+    })
+    .then(Response => Response.json())
+    .then(article => {
+      setData(article)
+      
+    })
+  },[])
+
+  
+
+  console.log(data)
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
+      <Text>{data.Date}</Text>
+
     </View>
   );
 }
