@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 
-import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable,TouchableOpacity} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,Alert,Touchable,TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
@@ -289,6 +289,7 @@ const styles = StyleSheet.create({
   },
   text:{
     textAlign:'center',
+  },
   plantColLeft:{
     width: 150, height: 200, marginLeft: '15%',
     borderRadius: 5,
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontWeight: '600',
 
-  }
+  },
 });
 
 export default App;
