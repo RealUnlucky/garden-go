@@ -85,46 +85,46 @@ function DetailsScreen({ navigation }) {
     <SafeAreaView style = {{flex: 1}}>
       <ScrollView>
         <View>
-          <Text style={{textAlign: 'center', fontSize: 35, marginBottom: '4%'}}>
+          <Text style={{textAlign: 'center', fontSize: 35, marginBottom: '4%', fontWeight: '600'}}>
             Plant Collection 
             <Image source={require('./imgs/planticon.png')} style={{width: 50, height: 50}}></Image>
           </Text>
           
         </View>
 
-        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+        <View style = {styles.plantCardShadow}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
-          </TouchableOpacity>
-        </View>
-
-        <View style = {{flexDirection:'row', marginTop: '5%'}}>
-          <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
           </TouchableOpacity>
         </View>
 
-        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+        <View style = {styles.plantCardShadow}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
           </TouchableOpacity>
         </View>
 
-        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+        <View style = {styles.plantCardShadow}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style = {styles.plantCardShadow}>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
           </TouchableOpacity>
         </View>
         
@@ -204,10 +204,40 @@ function App() {
 
 
 const styles = StyleSheet.create({
+  plantColLeft:{
+    width: 150, height: 200, marginLeft: '15%',
+    borderRadius: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+
+  plantColRight:{
+    width: 150, height: 200, marginRight: '15%',
+    borderRadius: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+
+  plantCardShadow:{
+    flexDirection:'row', marginTop: '5%',
+    borderRadius: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    shadowOpacity: 80,
+    shadowColor: 'black',
+  },
+
   aboutTitle: {
     fontSize: 40,
     textAlign: 'center',
     marginBottom: 30,
+    fontWeight: '600',
   }
 });
 
