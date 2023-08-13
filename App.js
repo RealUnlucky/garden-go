@@ -3,7 +3,7 @@ import {ScrollView, ImageBackground, TouchableOpacity, StyleSheet, Text, View, A
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { RNCamera } from 'react-native-camera';
+//import { RNCamera } from 'react-native-camera';
 
 const renderScene = SceneMap({
 
