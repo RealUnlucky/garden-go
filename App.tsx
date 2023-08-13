@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-
-import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,Alert,Touchable,TouchableOpacity} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable, style, TextInput} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import {Card} from 'react-native-paper'
+import CollapsibleList from './CollapsibleList';
+import { useFonts } from 'expo-font';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+import * as React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetRefProps } from './components/BottomSheet';
 import CollapsibleList from './CollapsibleList';
 import { useFonts } from 'expo-font';
+
 
 
 const renderScene = SceneMap({
@@ -52,6 +55,7 @@ function Profile(){
         </View>
         <TouchableOpacity style={{alignSelf: 'center', flexDirection:'row',justifyContent:'center',backgroundColor:'#fff',width:'90%',padding:20,paddingBottom:22,borderRadius:10,shadowOpacity:80,elevation:15,marginTop:20}}>
           <Image source={require('./imgs/bell.png')} style={{width:20,height:20}}></Image>
+          <Text>Missions</Text>
           <Text>Time left: {data.HoursLeft} hours</Text>
         </TouchableOpacity>
         <View style={{alignSelf: 'center', flexDirection:'row',justifyContent:'center',backgroundColor:'#fff',width:'90%',padding:20,paddingBottom:22,borderRadius:10,shadowOpacity:80,elevation:15,marginTop:20}}>
@@ -68,7 +72,6 @@ function Profile(){
 }
 
 function HomeScreen({ navigation }) {
-
   const [data, setData] = React.useState([])
 
   React.useEffect(() => {
@@ -154,10 +157,9 @@ function HomeScreen({ navigation }) {
     </ScrollView>
     */
     
-    
+
   );
 }
-
 
 
 function DetailsScreen({ navigation }) {
@@ -165,46 +167,56 @@ function DetailsScreen({ navigation }) {
     <SafeAreaView style = {{flex: 1}}>
       <ScrollView>
         <View>
+
           <Text style={{textAlign: 'center', fontSize: 35, marginBottom: '4%', fontWeight: '600'}}>
+
             Plant Collection 
             <Image source={require('./imgs/planticon.png')} style={{width: 50, height: 50}}></Image>
           </Text>
           
         </View>
-
-        <View style = {styles.plantCardShadow}>
+        
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
+            <Text style={{textAlign:'center'}}>Basil</Text>
+            <Image source={require('./imgs/basil.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
-          </TouchableOpacity>
-        </View>
-
-        <View style = {styles.plantCardShadow}>
-          <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>Lavender</Text>
+            <Image source={require('./imgs/lavender.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
           </TouchableOpacity>
         </View>
 
-        <View style = {styles.plantCardShadow}>
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
+          <Text style={{textAlign:'center'}}>Oregano</Text>
+            <Image source={require('./imgs/oregano.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>Parsley</Text>
+            <Image source={require('./imgs/parsley.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
           </TouchableOpacity>
         </View>
 
-        <View style = {styles.plantCardShadow}>
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColLeft}></Image>
+          <Text style={{textAlign:'center'}}>Rose</Text>
+            <Image source={require('./imgs/rose.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={styles.plantColRight}></Image>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>Rosemary</Text>
+            <Image source={require('./imgs/rosemary.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+          <TouchableOpacity>
+            <Text style={{textAlign:'center'}}>Sage</Text>
+            <Image source={require('./imgs/sage.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>thyme</Text>
+            <Image source={require('./imgs/thyme.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
           </TouchableOpacity>
         </View>
         
@@ -260,6 +272,10 @@ function App() {
       return null;
     }
 
+    function updateSearch(query) {
+      console.log(value)
+    };
+
   return (
     <TabView
       navigationState={{ index, routes }}
@@ -281,8 +297,76 @@ function App() {
   );
 }
 
-
 const styles = StyleSheet.create({
+  aboutTitle: {
+    fontSize: 40,
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+
+  txtError: {
+      marginTop: '2%',
+      width: '89%',
+      color: 'white',
+
+  },
+  vwClear: {
+      flex: 0.2,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: 30,
+      // width: 25,
+      // height: 25,
+  },
+  textInput: {
+      // backgroundColor: 'green',
+      flex: 1,
+      fontSize: 20,
+      marginLeft: 40,
+  },
+
+  vwSearch: {
+      flex: 0.2,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // width: 40,
+      // backgroundColor: 'red'
+  },
+  icSearch: {
+      height: 30, width: 30, marginLeft:50,
+  },
+  searchContainer:
+  {
+      backgroundColor: 'white',
+      width: '90%',
+      marginTop: 70,
+      height: 40,
+      flexDirection: 'row'
+
+  },
+  container: {
+      alignItems: 'center',
+      marginTop: 108,
+      justifyContent: 'center',
+      // height: '100%', width: '100%' 
+  },
+  resultContainer: {
+    alignItems: 'center',
+    marginTop: 80,
+    height: 600,
+    justifyContent: 'top',
+    // height: '100%', width: '100%' 
+  },
+  isClear: {
+    height: 30, width: 30
+  },
+  resultText: {
+    fontSize: 25,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    marginBottom: 10,
+    justyifyContent: 'bottom',
+  },
   button:{
     height:60,
     aspectRatio:1,
@@ -339,5 +423,69 @@ const styles = StyleSheet.create({
 
   },
 });
+
+
+
+function test() {
+  const [query, setQuery] = useState("");
+  const [error, setError] = useState();
+  //const [items, setItems] = useState([])
+  const items = [
+    "Rose", "Tulips", "Lavender", "Cactus", "Sunflower", "Daffodil", "Dandelion", "Daisy", "Watermelon", "Tree", "Pumpkin", "Weeds", "Cattail", "Pears", "Corn"
+  ];
+  
+  const inputRef = useRef()
+  const filteredItems = useMemo(() => {
+    return items.filter(item => {
+      return item.toLowerCase().includes(query.toLowerCase())
+    })
+  }, [items, query])
+  return (
+      <ImageBackground styles={{alignItems: "end",}} source={require('./imgs/image.jpg')}>
+        <View style={[styles.container, style]}>
+          <View style={styles.searchContainer}>
+              <View style={styles.vwSearch}>
+                
+                  <Image
+                      style={styles.icSearch}
+                      source={require('./imgs/ic_search.png')} />
+              </View>
+
+              <TextInput
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  type="search" 
+                  placeholder="Search for plants!"
+                  style={styles.textInput}
+                  onChangeText={(text) => {
+                          setQuery(text)
+                      }
+                  }
+              />
+              {
+                  query ?
+                      <TouchableOpacity
+                          onPress={() => setQuery('')}
+                          style={styles.vwClear}>
+                          <Image
+                              style={styles.icClear}
+                              source={require('./imgs/ic_clear.png')} />
+                      </TouchableOpacity>
+                      : <View style={styles.vwClear} />
+              }
+              
+
+            </View>
+          <View style={[styles.resultContainer, style]}>
+            {filteredItems.map(item => (
+              <Text style={styles.resultText}>{item}</Text>
+            ))}
+          </View>
+        </View>
+      </ImageBackground>    
+  )
+}
+
+
 
 export default App;
