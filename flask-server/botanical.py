@@ -1,6 +1,6 @@
 import requests
 import json
-
+from datetime import datetime
 
 
 class Garden():
@@ -49,8 +49,16 @@ class Garden():
         instructions.insert(2, 'sun')
         instructions.insert(4, 'prune')
         return instructions
+    def get_time(self):
+        now = datetime.now()
+
+        current_time = now.strftime("%H")
+        time_left = 24 - int(current_time)
+
+        return time_left
 
     def convert(self, lst):
         res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
         res_dct["Name"] = self.botanical_name
+        res_dct["HoursLeft"] = self.get_time()
         return res_dct

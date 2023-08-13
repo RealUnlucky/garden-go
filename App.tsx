@@ -24,6 +24,18 @@ const renderScene = SceneMap({
 
 
 function Profile(){
+  const [data, setData] = React.useState([])
+
+  React.useEffect(() => {
+    fetch('http://192.168.0.100:3000/data',{
+      method:'GET'
+    })
+    .then(Response => Response.json())
+    .then(article => {
+      setData(article)
+      
+    })
+  },[])
   return(
     <View>
       <View style={{backgroundColor: '#bee3ba'}}>
@@ -40,7 +52,7 @@ function Profile(){
         </View>
         <TouchableOpacity style={{alignSelf: 'center', flexDirection:'row',justifyContent:'center',backgroundColor:'#fff',width:'90%',padding:20,paddingBottom:22,borderRadius:10,shadowOpacity:80,elevation:15,marginTop:20}}>
           <Image source={require('./imgs/bell.png')} style={{width:20,height:20}}></Image>
-          <Text>Missions</Text>
+          <Text>Time left: {data.HoursLeft} hours</Text>
         </TouchableOpacity>
         <View style={{alignSelf: 'center', flexDirection:'row',justifyContent:'center',backgroundColor:'#fff',width:'90%',padding:20,paddingBottom:22,borderRadius:10,shadowOpacity:80,elevation:15,marginTop:20}}>
           <Image source={require('./imgs/pottedplant.png')} style={{width:20,height:25}}></Image>
@@ -91,14 +103,14 @@ function HomeScreen({ navigation }) {
           GardenGO
         </Text>
         <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Image source={require('./imgs/plant.png')} style={{width: '100%', height: '100%'}}></Image>
+          <Image source={require('./flask-server/TEST.jpeg')} style={{width: '100%', height: '100%'}}></Image>
         </TouchableOpacity>
         <View style={{marginTop: '5%', alignContent: 'center'}}>
           <Text style={{textAlign: 'center', fontSize: 20, color: 'green'}}>
-            {data.Name}
+            Water your plant!!!
           </Text>
           <Text style={{marginLeft: '2%', marginTop: '2%', fontSize: 15, color: 'green', textAlign:'center'}}>
-            {data.prune}
+            Time left:{data.HoursLeft} hours
           </Text>
         </View>
 
@@ -279,7 +291,7 @@ const styles = StyleSheet.create({
   },
   container:{
     flex:1,
-    backgroundColor:'white',
+    backgroundColor:'#73E2A7',
     alignItems:'center',
     justifyContent:'center',
   },

@@ -17,16 +17,11 @@ def get_time():
 	# Returning an api for showing in reactjs
 	return {"Date":x}
 
-	
-# Running app
-if __name__ == '__main__':
-	app.run(host = '192.168.0.100',port=3000,debug='True')
+
 """
 from find_plant import FindPlant
 from botanical import Garden
 from flask import Flask
-import datetime
-
 
 
 app = Flask(__name__)
@@ -59,6 +54,7 @@ def plant():
         genus = instructions.find_genus(PERENUAL_API_KEY)
 
     planting = instructions.convert(genus)
+
 
     return planting
 
