@@ -1,17 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-<<<<<<< Updated upstream
-import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, ScrollView,TouchableOpacity,Alert,Touchable} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import {Card} from 'react-native-paper'
-=======
-import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import * as React from 'react';
-import { TabView, SceneMap } from 'react-native-tab-view';
 import CollapsibleList from './CollapsibleList';
->>>>>>> Stashed changes
 
 const renderScene = SceneMap({
 
