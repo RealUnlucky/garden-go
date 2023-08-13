@@ -64,5 +64,3 @@ def plant():
 
 if __name__ == '__main__':
     app.run(host = '192.168.0.100',port=3000,debug='True')
-
-

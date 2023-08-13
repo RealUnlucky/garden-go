@@ -31,12 +31,10 @@ def plant():
     query2 = instructions.get(perenual_endpoint)
     if instructions.has_info(query2) == False:
         genus = instructions.find_genus(PERENUAL_API_KEY)
-
     planting = instructions.convert(genus)
 
     return planting
 
 if __name__ == '__main__':
     app.run(host = '192.168.0.100',port=3000,debug='True')
-
 

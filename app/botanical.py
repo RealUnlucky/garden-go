@@ -1,10 +1,6 @@
 import requests
 import json
 
-app = Flask(__name__)
-@app.route('/botData')
-
-
 class Garden():
     def __init__(self, botanical_name):
         self.botanical_name = botanical_name
@@ -54,4 +50,3 @@ class Garden():
 
     def convert(self, lst):
         res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
-        return res_dct
