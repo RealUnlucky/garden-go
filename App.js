@@ -76,30 +76,54 @@ function HomeScreen({ navigation }) {
 
 
 function DetailsScreen({ navigation }) {
-  const [data, setData] = React.useState([])
-
-  React.useEffect(() => {
-    fetch('http://192.168.0.100:3000/data',{
-      method:'GET'
-    })
-    .then(Response => Response.json())
-    .then(article => {
-      setData(article)
-      
-    })
-  },[])
-
-  
-
-  console.log(data)
-
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>{data.Date}</Text>
+    <SafeAreaView style = {{flex: 1}}>
+      <ScrollView>
+        <View>
+          <Text style={{textAlign: 'center', fontSize: 35, marginBottom: '4%'}}>Plant Collection</Text>
+        </View>
 
-    </View>
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          </TouchableOpacity>
+        </View>
+        
+      </ScrollView>
+    </SafeAreaView>  
   );
 }
+
 //const Stack = createNativeStackNavigator();
 
 
