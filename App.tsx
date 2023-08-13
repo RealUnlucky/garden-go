@@ -1,9 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable, style, TextInput} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable, TextInput} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import CollapsibleList from './CollapsibleList';
-import { useFonts } from 'expo-font';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import * as React from 'react';
@@ -20,7 +18,8 @@ const renderScene = SceneMap({
   first: HomeScreen,
   second: DetailsScreen,  
   third: Profile,
-  fourth: AboutScreen
+  fourth: AboutScreen,
+  fifth: searchBar,
 
 });
 
@@ -266,6 +265,7 @@ function App() {
       { key: 'first', title: 'First' },
       { key: 'second', title: 'Second' },
       { key: 'fourth', title: 'About' },
+      { key: 'fifth', title: 'Search'}
     ]);
 
     if (!fontsLoaded && !fontError) {
@@ -297,12 +297,74 @@ function App() {
   );
 }
 
+function searchBar() {
+  const [query, setQuery] = React.useState("");
+  const [error, setError] = React.useState();
+  //const [items, setItems] = useState([])
+  const items = [
+    "Rose", "Tulips", "Lavender", "Cactus", "Sunflower", "Daffodil", "Dandelion", "Daisy", "Watermelon", "Tree", "Pumpkin", "Weeds", "Cattail", "Pears", "Corn"
+  ];
+ 
+  const inputRef = React.useRef()
+  const filteredItems = React.useMemo(() => {
+    return items.filter(item => {
+      return item.toLowerCase().includes(query.toLowerCase())
+    })
+  }, [items, query])
+  return (
+      <ImageBackground source={require('./imgs/image.jpg')}>
+        <View style={[styles.container]}>
+          <View style={styles.searchContainer}>
+              <View style={styles.vwSearch}>
+               
+                  <Image
+                      style={styles.icSearch}
+                      source={require('./imgs/ic_search.png')} />
+              </View>
+
+
+
+
+              <TextInput
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  type="search"
+                  placeholder="Search for plants!"
+                  style={styles.textInput}
+                  onChangeText={(text) => {
+                          setQuery(text)
+                      }
+                  }
+              />
+              {
+                  query ?
+                      <TouchableOpacity
+                          onPress={() => setQuery('')}
+                          style={styles.vwClear}>
+                          <Image
+                              style={styles.icClear}
+                              source={require('./imgs/ic_clear.png')} />
+                      </TouchableOpacity>
+                      : <View style={styles.vwClear} />
+              }
+             
+
+
+
+
+            </View>
+          <View style={[styles.resultContainer]}>
+            {filteredItems.map(item => (
+              <Text style={styles.resultText}>{item}</Text>
+            ))}
+          </View>
+        </View>
+      </ImageBackground>    
+  )
+}
+
+
 const styles = StyleSheet.create({
-  aboutTitle: {
-    fontSize: 40,
-    textAlign: 'center',
-    marginBottom: 30,
-  },
 
   txtError: {
       marginTop: '2%',
@@ -354,7 +416,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 80,
     height: 600,
-    justifyContent: 'top',
+    justifyContent: 'flex-start',
     // height: '100%', width: '100%' 
   },
   isClear: {
@@ -373,7 +435,7 @@ const styles = StyleSheet.create({
     borderRadius:25,
     opacity:0.6,
   },
-  container:{
+  container1:{
     flex:1,
     backgroundColor:'#73E2A7',
     alignItems:'center',
@@ -426,65 +488,7 @@ const styles = StyleSheet.create({
 
 
 
-function test() {
-  const [query, setQuery] = useState("");
-  const [error, setError] = useState();
-  //const [items, setItems] = useState([])
-  const items = [
-    "Rose", "Tulips", "Lavender", "Cactus", "Sunflower", "Daffodil", "Dandelion", "Daisy", "Watermelon", "Tree", "Pumpkin", "Weeds", "Cattail", "Pears", "Corn"
-  ];
-  
-  const inputRef = useRef()
-  const filteredItems = useMemo(() => {
-    return items.filter(item => {
-      return item.toLowerCase().includes(query.toLowerCase())
-    })
-  }, [items, query])
-  return (
-      <ImageBackground styles={{alignItems: "end",}} source={require('./imgs/image.jpg')}>
-        <View style={[styles.container, style]}>
-          <View style={styles.searchContainer}>
-              <View style={styles.vwSearch}>
-                
-                  <Image
-                      style={styles.icSearch}
-                      source={require('./imgs/ic_search.png')} />
-              </View>
 
-              <TextInput
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                  type="search" 
-                  placeholder="Search for plants!"
-                  style={styles.textInput}
-                  onChangeText={(text) => {
-                          setQuery(text)
-                      }
-                  }
-              />
-              {
-                  query ?
-                      <TouchableOpacity
-                          onPress={() => setQuery('')}
-                          style={styles.vwClear}>
-                          <Image
-                              style={styles.icClear}
-                              source={require('./imgs/ic_clear.png')} />
-                      </TouchableOpacity>
-                      : <View style={styles.vwClear} />
-              }
-              
-
-            </View>
-          <View style={[styles.resultContainer, style]}>
-            {filteredItems.map(item => (
-              <Text style={styles.resultText}>{item}</Text>
-            ))}
-          </View>
-        </View>
-      </ImageBackground>    
-  )
-}
 
 
 
