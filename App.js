@@ -3,7 +3,6 @@ import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensi
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import {Card} from 'react-native-paper'
 import CollapsibleList from './CollapsibleList';
 import { useFonts } from 'expo-font';
 
@@ -94,37 +93,45 @@ function DetailsScreen({ navigation }) {
 
         <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+            <Text style={{textAlign:'center'}}>Basil</Text>
+            <Image source={require('./imgs/basil.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
-          </TouchableOpacity>
-        </View>
-
-        <View style = {{flexDirection:'row', marginTop: '5%'}}>
-          <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>Lavender</Text>
+            <Image source={require('./imgs/lavender.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
           </TouchableOpacity>
         </View>
 
         <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          <Text style={{textAlign:'center'}}>Oregano</Text>
+            <Image source={require('./imgs/oregano.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>Parsley</Text>
+            <Image source={require('./imgs/parsley.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
           </TouchableOpacity>
         </View>
 
         <View style = {{flexDirection:'row', marginTop: '5%'}}>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          <Text style={{textAlign:'center'}}>Rose</Text>
+            <Image source={require('./imgs/rose.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image source={require('./imgs/IMG_3484.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>Rosemary</Text>
+            <Image source={require('./imgs/rosemary.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style = {{flexDirection:'row', marginTop: '5%'}}>
+          <TouchableOpacity>
+            <Text style={{textAlign:'center'}}>Sage</Text>
+            <Image source={require('./imgs/sage.jpg')} style={{width: 150, height: 200, marginLeft: '15%'}}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+          <Text style={{textAlign:'center', marginRight: '25%'}}>thyme</Text>
+            <Image source={require('./imgs/thyme.jpg')} style={{width: 150, height: 200, marginRight: '15%'}}></Image>
           </TouchableOpacity>
         </View>
         
