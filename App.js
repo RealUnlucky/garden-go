@@ -1,9 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
+<<<<<<< Updated upstream
 import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, ScrollView,TouchableOpacity,Alert,Touchable} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import {Card} from 'react-native-paper'
+=======
+import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import * as React from 'react';
+import { TabView, SceneMap } from 'react-native-tab-view';
+import CollapsibleList from './CollapsibleList';
+>>>>>>> Stashed changes
 
 const renderScene = SceneMap({
 
@@ -11,6 +19,7 @@ const renderScene = SceneMap({
   first: HomeScreen,
   second: DetailsScreen,  
   third: Profile,
+  fourth: AboutScreen
 
 });
 
@@ -100,6 +109,32 @@ function DetailsScreen({ navigation }) {
 }
 //const Stack = createNativeStackNavigator();
 
+
+function AboutScreen({ navigation }) {
+  const data = [
+    { title: 'What is Garden Go?', content: 'Garden Go is a mobile app dedicated to inspiring more people to become gardeners by gamifying the process.' },
+    { title: 'How does gardening relate to environmental sustainability?', 
+    content: 'Just like trees, ordinary garden plants also absorb carbon dioxide and release oxygen. This helps mitigate the effects of climate change. \n Store bought foods create pollution through transportation and packaging. Growing your own fruit, vegetables, and herbs reduces the need to buy store bought. \n Proper gardening enhances soil health, which is better at retaining water and reduces the need for irrigation. This helps manage water runoff and prevent soil erosion, preventing flooding and reducing water pollution. \n Urban areas have heat islands, which can be shaded and cooled through the shade of trees and plants. \n Replacing the classic green lawn reduces lawn maintenance (and the water bill!) which can be even better if replaced with plants native to your area. \n' },
+    { title: 'What else can I do to care for the environment through my garden?', 
+    content: 'tbd' },
+  ];
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <ImageBackground source={require('./imgs/green-cartoon-plant-bg.jpg')} style={{width: '100%', height: '100%', justifyContent: 'center'}}>
+          <Text style ={styles.aboutTitle}>About</Text>
+          <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView>
+              <CollapsibleList data={data} />
+            </ScrollView>
+          </SafeAreaView>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
+  );
+}
+
 function App() {
     const layout = useWindowDimensions();
 
@@ -108,6 +143,7 @@ function App() {
       { key: 'third', title: 'Third' },
       { key: 'first', title: 'First' },
       { key: 'second', title: 'Second' },
+      { key: 'fourth', title: 'Fourth' },
     ]);
   return (
     <TabView
@@ -133,7 +169,10 @@ function App() {
 
 
 const styles = StyleSheet.create({
-
+  aboutTitle: {
+    fontSize: 40,
+    textAlign: 'center',
+  }
 });
 
 export default App;
