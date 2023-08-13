@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import {ImageBackground, StyleSheet, Text, View, Image, Button, useWindowDimensions, FlatList, SafeAreaView, ScrollView,TouchableOpacity,Alert,Touchable, style, TextInput} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import * as React from 'react';
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import CollapsibleList from './CollapsibleList';
